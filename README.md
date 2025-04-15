@@ -27,7 +27,7 @@ Mac / Linux:
 $ source venv/bin/activate
 ```
 
-4. Run the script by executing `python lnurl_payer.py`
+4. Run the script by executing `python lnurl-invoice-generator.py`
    You'll be prompted to enter an amount in satoshis.
 
 ## License
