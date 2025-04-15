@@ -17,8 +17,10 @@ def pay_lnurl():
     lnurl = Lnurl(lnurl_link)
     r = requests.get(lnurl.url)
     
-    if r.status_code != 200:
-        raise Exception('Error contacting the lnurl service')
+    if r.raise_for_status():
+        print(f"Response status code: {r.status_code}")
+        print(f"Response message: {r.text}")
+        raise Exception('Error contacting the lnurl service.  I didnt get a 200 response')
     
     res = LnurlResponse.from_dict(r.json())
     
@@ -37,9 +39,6 @@ def pay_lnurl():
 
     # Create a payment request
     r = requests.get(res.callback, params={'amount': amount})
-
-    if r.status_code != 200:
-        raise Exception('Error creating payment request')
 
     payment_request = r.json()
 
